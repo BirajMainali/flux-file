@@ -22,7 +22,7 @@ public class FluxFileLocalFileStorageProvider : IFluxFileStorageProvider
     {
         var filePath = Path.Combine(_basePath, fileName);
         File.WriteAllBytes(filePath, chunk);
-        return Task.FromResult(fileName);
+        return Task.FromResult(fileName);   
     }
 
     public async Task<byte[]> GetAllChunksAsync(string searchPattern)
