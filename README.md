@@ -1,4 +1,4 @@
-# FluxFile: Chunked File Upload Solution
+# FluxFile: Chunked File Upload
 
 **FluxFile** is a modular, customizable, and extensible file upload solution designed to efficiently handle large files by breaking them into manageable chunks. It allows integration with various storage systems, such as local file systems or cloud storage (e.g., Azure Blob Storage, AWS S3).
 
