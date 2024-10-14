@@ -190,13 +190,4 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
         });
     }
 });
-```
-
----
-
-## Getting Started
-
-1. **Clone the Repository**: Integrate the **FluxFile** system into your project.
-2. **Implement a Storage Provider**: Create your storage provider to work with your chosen storage backend.
-3. **Register Services**: Register the necessary services in your application setup.
-4. **Set Up API Endpoints**: Utilize the provided API endpoints for handling uploads.
+```  
