@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunked File Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        progress {
+            width: 100%;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        #status {
+            font-size: 18px;
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Chunked File Upload</h1>
+    <input type="file" id="fileInput" />
+    <progress id="progress" value="0" max="100"></progress>
+    <p id="status"></p>
+
+    <script src="flux-file.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const getUri = (uri) => `https://localhost:7006${uri}`;
+
+            const { startUpload } = useChunkedFileUpload({
+                chunkSize: 1024 * 120,
+                interval: () => new Promise(resolve => setTimeout(resolve, 1000)),
+                initializeUpload: async (fileName) => {
+                    const uri = getUri('/upload/start');
+                    const formData = new FormData();
+                    formData.append('fileName', fileName);
+
+                    const response = await fetch(uri, {
+                        method: 'POST',
+                        body: formData
+                    }).then(res => res.json());
+
+                    console.log(response);
+                    return response;
+                    
+                },
+                uploadChunk: async (fileName, chunk, index) => {
+                    const uri = getUri("/upload");
+                    const formData = new FormData();
+                    formData.append('fileName', fileName);
+                    formData.append('file', chunk);
+                    formData.append("index", index);
+                    const response = await fetch(uri, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Chunk upload failed: ${response.statusText}`);
+                    }
+                },
+                finalizeUpload: async (uniqueFileName) => {
+                    const uri = getUri('/upload/complete');
+                    const formData = new FormData();
+                    formData.append('fileName', uniqueFileName);
+
+                    const response = await fetch(uri, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to complete upload: ${response.statusText}`);
+                    }
+
+                    document.getElementById('status').innerText = `Upload complete: ${file.name}`;
+                },
+                reportProgress: (progress) => {
+                    document.getElementById('progress').value = progress;
+                    document.getElementById('status').innerText = `Upload progress: ${progress.toFixed(2)}%`;
+                },
+                handleError: (error) => {
+                    console.error(`Upload error: ${error}`);
+                    document.getElementById('status').innerText = `Upload failed: ${error}`;
+                    document.getElementById('status').classList.add('error');
+                }
+            });
+
+            const fileInput = document.getElementById('fileInput');
+            fileInput.addEventListener('change', async (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    await startUpload(file);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
