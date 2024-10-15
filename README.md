@@ -36,7 +36,3 @@ For detailed usage, refer to the [.NET documentation](https://github.com/BirajMa
 
 - [JavaScript documentation](https://github.com/BirajMainali/flux-file/blob/main/js-lib/lib/README.md)
 - [.NET documentation](https://github.com/BirajMainali/flux-file/blob/main/dotnet-lib/src/flux-lib/README.md)
-
----
-
-This version keeps it simple by focusing on installation commands and documentation links for both versions of the library.
