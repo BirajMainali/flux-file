@@ -22,6 +22,12 @@
 
 ---
 
+## Configuration
+
+```csharp
+builder.Services.AddFluxFile("local-fs-folder-or-null-or-empty-if-could-service");
+```
+
 ## Core Components
 
 ### 1. `IFluxFileStorageProvider`
@@ -46,9 +52,9 @@ This service manages the high-level file upload process, working with the storag
 public interface IFluxFileUploadService
 {
     Task<string> StartUploadAsync(string fileName);
-    Task<string> UploadChunkAsync(string fileIdentifier, byte[] chunk, long chunkIndex);
-    Task CompleteUploadAsync(string fileIdentifier);
-    Task CancelUploadAsync(string fileIdentifier);
+    Task<string> UploadChunkAsync(string fileName, byte[] chunk, long chunkIndex);
+    Task CompleteUploadAsync(string fileName);
+    Task CancelUploadAsync(string fileName);
 }
 ```
 

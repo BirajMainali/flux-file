@@ -5,7 +5,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "author": "BirajMainali",
+  "license": "MIT",
+  "description": "FluxFile is a JavaScript library for handling large file uploads by splitting them into manageable chunks. It offers customizable file handling and ensures reliable uploads.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BirajMainali/flux-file.git"
+  },
+  "keywords": [
+    "file upload",
+    "chunk upload",
+    "large file upload",
+    "flux-file",
+    "file handling"
+  ],
+  "bugs": {
+    "url": "https://github.com/BirajMainali/flux-file/issues"
+  },
+  "homepage": "https://github.com/BirajMainali/flux-file/blob/main/js-lib/lib/README.md"
 }
