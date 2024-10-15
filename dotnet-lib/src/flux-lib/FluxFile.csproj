@@ -1,14 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>12</LangVersion>
-        <Nullable>enable</Nullable>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <LangVersion>12</LangVersion>
+      <Nullable>enable</Nullable>
+      <Authors>BirajMainali</Authors>
+      <Description>NuGet package to upload large files efficiently by splitting them into chunks and managing the upload process seamlessly. FluxFile helps you customize file naming, storage, and more, providing a scalable solution for handling large file uploads.</Description>
+      <Copyright>MIT</Copyright>
+      <RepositoryUrl>https://github.com/BirajMainali/flux-file.git</RepositoryUrl>
+      <PackageReadmeFile>README.md</PackageReadmeFile>
+      <PackageTags>file upload, chunked file upload, large file upload, scalable file upload, FluxFile</PackageTags>
+      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+      <Product>FluxFile</Product>
+      <PackageId>BirajMainali.FluxFile</PackageId>
+      <Version>1.0.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="README.md" />
+      <Resource Include="README.md">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
